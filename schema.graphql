@@ -1,4 +1,4 @@
-type Clanker_TokenCreated {
+type Clanker_TokenCreated @entity {
   id: ID!
   tokenAddress: String!
   lpNftId: BigInt!
@@ -11,7 +11,7 @@ type Clanker_TokenCreated {
   castHash: String!
 }
 
-type SocialDexDeployer_TokenCreated {
+type SocialDexDeployer_TokenCreated @entity {
   id: ID!
   tokenAddress: String!
   lpNftId: BigInt!
@@ -22,4 +22,3 @@ type SocialDexDeployer_TokenCreated {
   _supply: BigInt!
   lockerAddress: String!
 }
-

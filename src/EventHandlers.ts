@@ -1,12 +1,10 @@
-/*
- * Please refer to https://docs.envio.dev for a thorough guide on all Envio indexer features
- */
 import {
   Clanker,
   Clanker_TokenCreated,
   SocialDexDeployer,
   SocialDexDeployer_TokenCreated,
 } from "generated";
+
 
 Clanker.TokenCreated.handler(async ({ event, context }) => {
   const entity: Clanker_TokenCreated = {
@@ -22,8 +20,10 @@ Clanker.TokenCreated.handler(async ({ event, context }) => {
     castHash: event.params.castHash,
   };
 
-  context.Clanker_TokenCreated.set(entity);
+  await context.Clanker_TokenCreated.set(entity);
+
 });
+
 
 SocialDexDeployer.TokenCreated.handler(async ({ event, context }) => {
   const entity: SocialDexDeployer_TokenCreated = {
@@ -38,5 +38,7 @@ SocialDexDeployer.TokenCreated.handler(async ({ event, context }) => {
     lockerAddress: event.params.lockerAddress,
   };
 
-  context.SocialDexDeployer_TokenCreated.set(entity);
+  await context.SocialDexDeployer_TokenCreated.set(entity);
+
+
 });
