@@ -1,12 +1,21 @@
 import {
   Clanker,
   Clanker_TokenCreated,
+  LockerFactory,
+  LockerFactory_deployed,
   SocialDexDeployer,
   SocialDexDeployer_TokenCreated,
+  handlerContext,
+  EventLog,
+  Clanker_TokenCreated_eventArgs,
+  LockerFactory_Deployed_eventArgs,
+  SocialDexDeployer_TokenCreated_eventArgs
 } from "generated";
 
-
-Clanker.TokenCreated.handler(async ({ event, context }) => {
+Clanker.TokenCreated.handler(async ({ event, context }: {
+  event: EventLog<Clanker_TokenCreated_eventArgs>,
+  context: handlerContext
+}) => {
   const entity: Clanker_TokenCreated = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     tokenAddress: event.params.tokenAddress,
@@ -20,12 +29,28 @@ Clanker.TokenCreated.handler(async ({ event, context }) => {
     castHash: event.params.castHash,
   };
 
-  await context.Clanker_TokenCreated.set(entity);
-
+  context.Clanker_TokenCreated.set(entity);
 });
 
+LockerFactory.Deployed.handler(async ({ event, context }: {
+  event: EventLog<LockerFactory_Deployed_eventArgs>,
+  context: handlerContext
+}) => {
+  const entity: LockerFactory_deployed = {
+    id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
+    lockerAddress: event.params.lockerAddress,
+    owner: event.params.owner,
+    tokenId: event.params.tokenId,
+    lockingPeriod: event.params.lockingPeriod,
+  };
 
-SocialDexDeployer.TokenCreated.handler(async ({ event, context }) => {
+  context.LockerFactory_deployed.set(entity);
+});
+
+SocialDexDeployer.TokenCreated.handler(async ({ event, context }: {
+  event: EventLog<SocialDexDeployer_TokenCreated_eventArgs>,
+  context: handlerContext
+}) => {
   const entity: SocialDexDeployer_TokenCreated = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     tokenAddress: event.params.tokenAddress,
@@ -38,7 +63,5 @@ SocialDexDeployer.TokenCreated.handler(async ({ event, context }) => {
     lockerAddress: event.params.lockerAddress,
   };
 
-  await context.SocialDexDeployer_TokenCreated.set(entity);
-
-
+  context.SocialDexDeployer_TokenCreated.set(entity);
 });
