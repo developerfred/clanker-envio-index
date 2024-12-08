@@ -1,0 +1,25 @@
+type Clanker_TokenCreated {
+  id: ID!
+  tokenAddress: String!
+  lpNftId: BigInt!
+  deployer: String!
+  fid: BigInt!
+  name: String!
+  symbol: String!
+  supply: BigInt!
+  lockerAddress: String!
+  castHash: String!
+}
+
+type SocialDexDeployer_TokenCreated {
+  id: ID!
+  tokenAddress: String!
+  lpNftId: BigInt!
+  deployer: String!
+  name: String!
+  symbol: String!
+  supply: BigInt!
+  _supply: BigInt!
+  lockerAddress: String!
+}
+
